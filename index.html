@@ -28,15 +28,6 @@
   .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; margin-bottom: 10px; box-shadow: 0 2px 10px rgba(92,61,46,0.06); }
   .card-hint { font-size: 12px; color: var(--text-soft); margin-bottom: 12px; line-height: 1.5; }
 
-  /* Setup steps */
-  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
-  .step:last-child { margin-bottom: 0; }
-  .step-num { width: 26px; height: 26px; background: var(--amber); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-  .step-text { font-size: 13px; line-height: 1.6; color: var(--text); }
-  .step-text a { color: var(--amber-dark); font-weight: 600; text-decoration: none; }
-  .step-text strong { color: var(--text); }
-
-  /* Pills */
   .pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
   .pill { background: var(--warm); border: 2px solid transparent; border-radius: 24px; padding: 8px 15px; font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; color: var(--text); line-height: 1; -webkit-tap-highlight-color: transparent; }
   .pill:hover { border-color: var(--amber); }
@@ -66,53 +57,51 @@
   .tog::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
   .tog.on::after { transform: translateX(20px); }
 
-  .gen-btn { width: 100%; background: linear-gradient(135deg, var(--amber) 0%, var(--amber-dark) 100%); color: white; border: none; border-radius: 18px; padding: 20px; font-size: 17px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 28px; transition: all 0.2s; box-shadow: 0 5px 20px rgba(196,135,42,0.38); -webkit-tap-highlight-color: transparent; }
-  .gen-btn:active { transform: scale(0.98); }
-  .gen-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
-
-  .loading { text-align: center; padding: 32px; display: none; }
-  .loading.show { display: block; }
-  .spinner { width: 34px; height: 34px; border: 3px solid var(--border); border-top-color: var(--amber); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 14px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading p { color: var(--text-soft); font-size: 14px; }
-  .loading-tip { font-size: 12px; color: var(--border); margin-top: 6px; }
-
-  .result-wrap { display: none; }
-  .result-wrap.show { display: block; }
-  .result-card { background: var(--card); border: 2px solid var(--amber); border-radius: 18px; padding: 22px; margin-top: 22px; box-shadow: 0 6px 24px rgba(232,168,76,0.18); }
-  .result-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--amber-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-  .result-tag::after { content: ''; flex: 1; height: 1px; background: #f0dfc0; }
-  .result-text { font-size: 16px; line-height: 1.85; color: var(--text); white-space: pre-wrap; }
-  .result-actions { display: flex; gap: 10px; margin-top: 18px; }
-  .act-btn { flex: 1; padding: 14px; border-radius: 13px; font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.15s; border: 2px solid; -webkit-tap-highlight-color: transparent; }
-  .btn-copy { background: var(--brown); color: white; border-color: var(--brown); }
-  .btn-regen { background: transparent; color: var(--brown-light); border-color: var(--border); }
-
-  .err { background: #fff5f5; border: 2px solid #f5c0bb; border-radius: 14px; padding: 14px 16px; font-size: 13px; color: #c0574a; margin-top: 14px; display: none; line-height: 1.6; }
-  .err.show { display: block; }
-
-  .api-row { display: flex; gap: 8px; }
-  .api-input { flex: 1; background: var(--warm); border: 1.5px solid var(--border); border-radius: 11px; padding: 11px 13px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); outline: none; -webkit-appearance: none; }
-  .api-input:focus { border-color: var(--amber); }
-  .api-input::placeholder { color: var(--text-soft); opacity: 0.6; }
-  .api-save { background: var(--amber); border: none; border-radius: 11px; padding: 11px 16px; color: white; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; white-space: nowrap; }
-  .key-ok { font-size: 12px; color: var(--green); margin-top: 7px; display: none; font-weight: 500; }
-  .key-ok.show { display: block; }
-
-  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(90px); background: var(--brown); color: white; padding: 14px 28px; border-radius: 28px; font-size: 15px; font-weight: 600; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 100; box-shadow: 0 6px 20px rgba(0,0,0,0.25); white-space: nowrap; }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
   .collapsible-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; -webkit-tap-highlight-color: transparent; }
   .arrow { font-size: 14px; transition: transform 0.2s; color: var(--text-soft); }
   .collapsible-header.open .arrow { transform: rotate(180deg); }
   .collapsible-body { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
   .collapsible-body.open { max-height: 1200px; }
 
+  /* How it works banner */
+  .how-it-works { background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%); border: 1.5px solid #b8d9f5; border-radius: 16px; padding: 16px; margin-bottom: 6px; }
+  .how-title { font-size: 13px; font-weight: 700; color: #2c5f8a; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .how-step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+  .how-step:last-child { margin-bottom: 0; }
+  .how-num { width: 22px; height: 22px; background: #4a9fd4; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .how-text { font-size: 13px; color: #2c5f8a; line-height: 1.5; }
+
+  /* Big generate button */
+  .gen-btn { width: 100%; background: linear-gradient(135deg, var(--amber) 0%, var(--amber-dark) 100%); color: white; border: none; border-radius: 18px; padding: 20px; font-size: 17px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 28px; transition: all 0.2s; box-shadow: 0 5px 20px rgba(196,135,42,0.38); -webkit-tap-highlight-color: transparent; }
+  .gen-btn:active { transform: scale(0.98); }
+
+  /* Prompt result */
+  .result-wrap { display: none; }
+  .result-wrap.show { display: block; margin-top: 24px; }
+
+  .prompt-card { background: var(--card); border: 2px solid var(--amber); border-radius: 18px; padding: 20px; box-shadow: 0 6px 24px rgba(232,168,76,0.18); }
+  .prompt-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--amber-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .prompt-tag::after { content: ''; flex: 1; height: 1px; background: #f0dfc0; }
+  .prompt-text { font-size: 14px; line-height: 1.7; color: var(--text); white-space: pre-wrap; background: var(--warm); border-radius: 12px; padding: 14px; max-height: 200px; overflow-y: auto; border: 1px solid var(--border); }
+
+  .action-row { display: flex; gap: 10px; margin-top: 14px; }
+  .act-btn { flex: 1; padding: 14px 10px; border-radius: 13px; font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.15s; border: 2px solid; text-align: center; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; -webkit-tap-highlight-color: transparent; }
+  .btn-copy { background: var(--brown); color: white; border-color: var(--brown); }
+  .btn-claude { background: linear-gradient(135deg, #7c5cbf, #5c3d9e); color: white; border-color: #5c3d9e; }
+
+  .next-steps { background: #f0faf2; border: 1.5px solid #b8e5c4; border-radius: 14px; padding: 14px 16px; margin-top: 12px; }
+  .next-title { font-size: 12px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+  .next-step { font-size: 13px; color: #2d5a3d; line-height: 1.6; margin-bottom: 4px; display: flex; gap: 8px; }
+  .next-step:last-child { margin-bottom: 0; }
+
   .history-item { background: var(--warm); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; cursor: pointer; border: 1.5px solid transparent; transition: border-color 0.15s; }
   .history-item:hover { border-color: var(--amber); }
   .hist-date { font-size: 11px; color: var(--text-soft); margin-bottom: 4px; font-weight: 500; }
   .hist-preview { color: var(--text); font-size: 13px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .history-empty { font-size: 13px; color: var(--text-soft); text-align: center; padding: 16px; opacity: 0.7; }
+
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(90px); background: var(--brown); color: white; padding: 14px 28px; border-radius: 28px; font-size: 15px; font-weight: 600; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 100; box-shadow: 0 6px 20px rgba(0,0,0,0.25); white-space: nowrap; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -125,29 +114,13 @@
 
 <div class="content">
 
-  <!-- Setup -->
-  <div class="section-label">One-time setup (free)</div>
-  <div class="card">
-    <div class="card-hint" style="margin-bottom:14px;">This app uses Google's Gemini AI — completely free, no credit card needed.</div>
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text">Go to <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> and sign in with your Google account</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text">Click <strong>"Create API Key"</strong> → copy the key it gives you</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text">Paste it below and hit <strong>Save</strong> — you only need to do this once</div>
-    </div>
-    <div style="margin-top:14px;">
-      <div class="api-row">
-        <input type="password" class="api-input" id="apiKey" placeholder="AIza..." autocomplete="off" />
-        <button class="api-save" onclick="saveKey()">Save</button>
-      </div>
-      <div class="key-ok" id="keyOk">✓ Key saved on this device</div>
-    </div>
+  <!-- How it works -->
+  <div class="section-label">How it works</div>
+  <div class="how-it-works">
+    <div class="how-title">✨ Free — uses your Claude subscription</div>
+    <div class="how-step"><div class="how-num">1</div><div class="how-text">Fill in how you're feeling and what's going on</div></div>
+    <div class="how-step"><div class="how-num">2</div><div class="how-text">Tap <strong>Build my prompt</strong> — the app writes a perfect prompt for you</div></div>
+    <div class="how-step"><div class="how-num">3</div><div class="how-text">Copy it and paste into <strong>claude.ai</strong> (or tap Open Claude) — get your text in seconds</div></div>
   </div>
 
   <!-- Mood -->
@@ -212,8 +185,8 @@
   <div class="section-label">Uni update (optional)</div>
   <div class="card">
     <div class="card-hint">How's study going? Mum always wants to know.</div>
-    <textarea id="uniStuff" rows="3"
-      placeholder="e.g. Got an assignment back, struggling with one subject, feeling on top of it, big deadline coming up..."></textarea>
+    <textarea id="uniStuff" rows="2"
+      placeholder="e.g. Got an assignment back, struggling with one subject, big deadline coming up..."></textarea>
     <div class="chips">
       <span class="chip" onclick="addTo('uniStuff','feeling pretty on top of things')">✅ On top of it</span>
       <span class="chip" onclick="addTo('uniStuff','a bit behind but catching up')">📖 Catching up</span>
@@ -228,19 +201,19 @@
   <div class="section-label">Anything for Mum specifically?</div>
   <div class="card">
     <div class="card-hint">Questions for her, family stuff, things you want her to know.</div>
-    <textarea id="forMum" rows="3"
-      placeholder="Ask how she is, mention family, bring up something she told you last time, let her know you're thinking of her..."></textarea>
+    <textarea id="forMum" rows="2"
+      placeholder="Ask how she is, mention family, let her know you're thinking of her..."></textarea>
     <div class="chips">
       <span class="chip" onclick="addTo('forMum','ask how she\'s been doing')">💬 Ask how she is</span>
-      <span class="chip" onclick="addTo('forMum','ask about the rest of the family')">👨‍👩‍👧 Family check-in</span>
-      <span class="chip" onclick="addTo('forMum','mention rent is coming up')">💸 Rent mention</span>
+      <span class="chip" onclick="addTo('forMum','ask about the rest of the family')">👨‍👩‍👧 Family</span>
+      <span class="chip" onclick="addTo('forMum','mention rent is coming up')">💸 Rent</span>
       <span class="chip" onclick="addTo('forMum','let her know I\'m thinking of her')">❤️ Thinking of her</span>
-      <span class="chip" onclick="addTo('forMum','suggest we catch up soon')">📆 Suggest catch-up</span>
+      <span class="chip" onclick="addTo('forMum','suggest we catch up soon')">📆 Catch-up</span>
       <span class="chip" onclick="addTo('forMum','thank her for something')">🙏 Say thanks</span>
     </div>
   </div>
 
-  <!-- More options collapsible -->
+  <!-- More options -->
   <div class="section-label">More options</div>
   <div class="card">
     <div class="collapsible-header" onclick="this.classList.toggle('open'); document.getElementById('advBody').classList.toggle('open')">
@@ -249,24 +222,21 @@
     </div>
     <div class="collapsible-body" id="advBody">
       <div style="height:14px;"></div>
-
       <div style="font-size:11px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Vibe</div>
       <div class="pill-row" id="vibeRow">
-        <button class="pill on" onclick="setExclusive(this,'vibeRow')">💬 Casual & warm</button>
-        <button class="pill" onclick="setExclusive(this,'vibeRow')">😂 Funny & jokey</button>
-        <button class="pill" onclick="setExclusive(this,'vibeRow')">💌 Sweet & loving</button>
-        <button class="pill" onclick="setExclusive(this,'vibeRow')">⚡ Short & snappy</button>
-        <button class="pill" onclick="setExclusive(this,'vibeRow')">🤗 Chatty & detailed</button>
-        <button class="pill" onclick="setExclusive(this,'vibeRow')">🌿 Calm & reflective</button>
+        <button class="pill on" onclick="setEx(this,'vibeRow')">💬 Casual & warm</button>
+        <button class="pill" onclick="setEx(this,'vibeRow')">😂 Funny & jokey</button>
+        <button class="pill" onclick="setEx(this,'vibeRow')">💌 Sweet & loving</button>
+        <button class="pill" onclick="setEx(this,'vibeRow')">⚡ Short & snappy</button>
+        <button class="pill" onclick="setEx(this,'vibeRow')">🤗 Chatty & detailed</button>
+        <button class="pill" onclick="setEx(this,'vibeRow')">🌿 Calm & reflective</button>
       </div>
-
       <div style="font-size:11px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin:16px 0 8px;">Length</div>
       <div class="pill-row" id="lengthRow">
-        <button class="pill" onclick="setExclusive(this,'lengthRow')">🤏 Super short (2–3 lines)</button>
-        <button class="pill on" onclick="setExclusive(this,'lengthRow')">✉️ Normal (4–6 lines)</button>
-        <button class="pill" onclick="setExclusive(this,'lengthRow')">📜 Longer catch-up (8–10 lines)</button>
+        <button class="pill" onclick="setEx(this,'lengthRow')">🤏 Super short (2–3 lines)</button>
+        <button class="pill on" onclick="setEx(this,'lengthRow')">✉️ Normal (4–6 lines)</button>
+        <button class="pill" onclick="setEx(this,'lengthRow')">📜 Long catch-up (8–10 lines)</button>
       </div>
-
       <div style="font-size:11px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin:16px 0 4px;">Include</div>
       <div class="tog-row">
         <div><div class="tog-label">📅 What's coming up</div><div class="tog-sub">Upcoming plans or deadlines</div></div>
@@ -277,58 +247,54 @@
         <button class="tog on" id="t-ask" onclick="this.classList.toggle('on')"></button>
       </div>
       <div class="tog-row">
-        <div><div class="tog-label">😂 Something light or funny</div><div class="tog-sub">A small joke or something she'd find amusing</div></div>
+        <div><div class="tog-label">😂 Something light or funny</div><div class="tog-sub">A small joke or something she'd enjoy</div></div>
         <button class="tog" id="t-funny" onclick="this.classList.toggle('on')"></button>
       </div>
       <div class="tog-row">
         <div><div class="tog-label">💰 Bills or money stuff</div><div class="tog-sub">Rent, spending, financial things</div></div>
         <button class="tog" id="t-money" onclick="this.classList.toggle('on')"></button>
       </div>
-
       <div style="font-size:11px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin:16px 0 8px;">Custom sign-off (optional)</div>
-      <textarea id="signoff" rows="1" placeholder="e.g. Love ya, Talk soon — or leave blank"></textarea>
+      <textarea id="signoff" rows="1" placeholder="e.g. Love ya, Talk soon — or leave blank for natural ending"></textarea>
     </div>
   </div>
 
   <!-- History -->
-  <div class="section-label">Previous texts</div>
-  <div class="card" id="histCard">
-    <div class="history-empty" id="histEmpty">Your last 5 generated texts will appear here.</div>
+  <div class="section-label">Previous prompts</div>
+  <div class="card">
+    <div class="history-empty" id="histEmpty">Your last 5 prompts will appear here — tap to restore.</div>
     <div id="histList"></div>
   </div>
 
-  <button class="gen-btn" id="genBtn" onclick="generate()">✨ Write my text to Mum</button>
+  <button class="gen-btn" onclick="buildPromptAndShow()">✨ Build my prompt</button>
 
-  <div class="loading" id="loading">
-    <div class="spinner"></div>
-    <p>Writing something lovely...</p>
-    <div class="loading-tip" id="loadTip"></div>
-  </div>
-
-  <div class="err" id="errBox"></div>
-
+  <!-- Result -->
   <div class="result-wrap" id="resultWrap">
-    <div class="result-card">
-      <div class="result-tag">✉️ Your text to Mum</div>
-      <div class="result-text" id="resultText"></div>
+    <div class="prompt-card">
+      <div class="prompt-tag">📋 Your prompt — ready to paste into Claude</div>
+      <div class="prompt-text" id="promptText"></div>
     </div>
-    <div class="result-actions">
-      <button class="act-btn btn-copy" onclick="copyText()">📋 Copy text</button>
-      <button class="act-btn btn-regen" onclick="generate()">↺ Try again</button>
+    <div class="action-row">
+      <button class="act-btn btn-copy" onclick="copyPrompt()">📋 Copy prompt</button>
+      <a class="act-btn btn-claude" href="https://claude.ai" target="_blank">🤖 Open Claude</a>
+    </div>
+    <div class="next-steps">
+      <div class="next-title">✅ Next steps</div>
+      <div class="next-step"><span>1️⃣</span><span>Tap <strong>Copy prompt</strong> above</span></div>
+      <div class="next-step"><span>2️⃣</span><span>Tap <strong>Open Claude</strong> — it opens claude.ai</span></div>
+      <div class="next-step"><span>3️⃣</span><span>Paste the prompt into the chat and hit send</span></div>
+      <div class="next-step"><span>4️⃣</span><span>Copy the text Claude writes and send it to Mum 💛</span></div>
     </div>
   </div>
 
 </div>
 
-<div class="toast" id="toast">Copied! 💛 Paste it into your messages</div>
+<div class="toast" id="toast">Prompt copied! 💛 Now paste it into Claude</div>
 
 <script>
-// ── Init ─────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
   updateChip();
   setInterval(updateChip, 60000);
-  const k = localStorage.getItem('heymum_gemini_key');
-  if (k) { document.getElementById('apiKey').value = k; document.getElementById('keyOk').classList.add('show'); }
   loadHistory();
 });
 
@@ -341,41 +307,30 @@ function updateChip() {
   document.getElementById('contextChip').textContent = `${g} · ${day} ${date}`;
 }
 
-// ── Key ──────────────────────────────────────────────────────
-function saveKey() {
-  const v = document.getElementById('apiKey').value.trim();
-  if (!v) return;
-  localStorage.setItem('heymum_gemini_key', v);
-  document.getElementById('keyOk').classList.add('show');
-}
-
-// ── Pills ────────────────────────────────────────────────────
-function setExclusive(btn, rowId) {
+function setEx(btn, rowId) {
   document.querySelectorAll(`#${rowId} .pill`).forEach(b => b.classList.remove('on'));
   btn.classList.add('on');
 }
 
-// ── Chips ────────────────────────────────────────────────────
 function addTo(id, text) {
   const ta = document.getElementById(id);
   ta.value = ta.value.trim() ? ta.value.trim() + ', ' + text : text;
   ta.focus();
 }
 
-// ── History ──────────────────────────────────────────────────
 function loadHistory() {
-  const raw = localStorage.getItem('heymum_history');
+  const raw = localStorage.getItem('heymum_prompts');
   if (!raw) return;
   renderHistory(JSON.parse(raw));
 }
 
-function saveToHistory(text) {
-  const raw = localStorage.getItem('heymum_history');
+function saveToHistory(prompt) {
+  const raw = localStorage.getItem('heymum_prompts');
   const hist = raw ? JSON.parse(raw) : [];
   const now = new Date();
-  hist.unshift({ text, date: now.toLocaleDateString('en-AU', { weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) });
+  hist.unshift({ prompt, date: now.toLocaleDateString('en-AU', { weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }) });
   if (hist.length > 5) hist.pop();
-  localStorage.setItem('heymum_history', JSON.stringify(hist));
+  localStorage.setItem('heymum_prompts', JSON.stringify(hist));
   renderHistory(hist);
 }
 
@@ -384,19 +339,18 @@ function renderHistory(hist) {
   document.getElementById('histList').innerHTML = hist.map((h, i) =>
     `<div class="history-item" onclick="restoreHist(${i})">
       <div class="hist-date">${h.date}</div>
-      <div class="hist-preview">${h.text}</div>
+      <div class="hist-preview">${h.prompt.substring(0,120)}...</div>
     </div>`
   ).join('');
 }
 
 function restoreHist(i) {
-  const hist = JSON.parse(localStorage.getItem('heymum_history'));
-  document.getElementById('resultText').textContent = hist[i].text;
+  const hist = JSON.parse(localStorage.getItem('heymum_prompts'));
+  document.getElementById('promptText').textContent = hist[i].prompt;
   document.getElementById('resultWrap').classList.add('show');
   document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ── Build prompt ─────────────────────────────────────────────
 function buildPrompt() {
   const now = new Date();
   const h = now.getHours();
@@ -417,125 +371,64 @@ function buildPrompt() {
   const incFunny = document.getElementById('t-funny').classList.contains('on');
   const incMoney = document.getElementById('t-money').classList.contains('on');
 
-  const lengthGuide = length.includes('Super short') ? '2–3 sentences max'
-    : length.includes('Longer') ? '8–10 sentences, a real proper catch-up'
+  const lengthGuide = length.includes('Super short') ? '2–3 sentences maximum'
+    : length.includes('Long') ? '8–10 sentences, a real proper catch-up'
     : '4–6 sentences';
 
   const extras = [];
-  if (uniStuff) extras.push(`Uni: ${uniStuff}`);
-  if (forMum) extras.push(`For Mum specifically: ${forMum}`);
+  if (uniStuff) extras.push(`Uni update: ${uniStuff}`);
+  if (forMum) extras.push(`Specific things for Mum: ${forMum}`);
   if (incNext) extras.push("mention what's coming up soon");
-  if (incAsk) extras.push('end with a genuine question for Mum');
+  if (incAsk) extras.push('end with a genuine warm question for Mum');
   if (incFunny) extras.push('include something light or funny she would enjoy');
   if (incMoney) extras.push('casually mention bills or money if relevant');
-  if (signoff) extras.push(`sign-off: "${signoff}"`);
+  if (signoff) extras.push(`use this sign-off: "${signoff}"`);
 
-  return `Help Chris, a uni student in Brisbane, write a text to his mum Linda right now.
+  return `Write a text message from Chris (a uni student in Brisbane) to his mum Linda.
 
 CONTEXT:
 - Time: ${tod} on ${day}, ${date}
 - Feeling: ${moods}
-- Energy: ${energy}/10
+- Energy level: ${energy}/10 (1=exhausted, 10=wired)
 - What's going on: ${happenings}
 ${extras.length ? '- ' + extras.join('\n- ') : ''}
 
 REQUIREMENTS:
-- Sound like a real young Australian guy texting his mum — natural, casual
+- Sound like a real young Australian guy texting his mum — genuinely casual, not formal
 - Vibe: ${vibe}
 - Length: ${lengthGuide}
 - Start with "Hey Mum,"
-- No bullet points or lists — it's a text
-- Let the time of day (${tod}, ${day}) shape the tone naturally
-- Energy level ${energy}/10 should subtly come through
-- Australian English, warm but not sappy
-
-Output ONLY the message text. Nothing else.`;
+- No bullet points or lists — it's a text message
+- The time of day (${tod} on ${day}) should naturally shape the tone
+- Energy level ${energy}/10 should subtly come through in pace and tone
+- Warm Australian English, not overdone or sappy
+- Output ONLY the message — nothing else, no explanation`;
 }
 
-// ── Generate via Gemini ──────────────────────────────────────
-const tips = ['Reading your mood...','Finding the right words...','Making it sound like you...','Adding some warmth...','Almost done...'];
-
-async function generate() {
-  const key = document.getElementById('apiKey').value.trim();
-  if (!key) { showErr('Please enter your Gemini API key at the top first.\n\nGet one free at aistudio.google.com/apikey — no credit card needed!'); return; }
-
-  const btn = document.getElementById('genBtn');
-  const loading = document.getElementById('loading');
-  const resultWrap = document.getElementById('resultWrap');
-  document.getElementById('errBox').classList.remove('show');
-  btn.disabled = true;
-  loading.classList.add('show');
-  resultWrap.classList.remove('show');
-
-  let ti = 0;
-  const tipEl = document.getElementById('loadTip');
-  tipEl.textContent = tips[0];
-  const tipInt = setInterval(() => { ti = (ti+1) % tips.length; tipEl.textContent = tips[ti]; }, 1800);
-
-  try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: buildPrompt() }] }],
-          generationConfig: { temperature: 0.9, maxOutputTokens: 600 }
-        })
-      }
-    );
-
-    clearInterval(tipInt);
-
-    if (!res.ok) {
-      const e = await res.json();
-      const msg = e.error?.message || `Error ${res.status}`;
-      if (msg.includes('API_KEY_INVALID') || msg.includes('API key not valid')) {
-        throw new Error('Your API key looks invalid. Double-check you copied it correctly from aistudio.google.com/apikey');
-      }
-      throw new Error(msg);
-    }
-
-    const data = await res.json();
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
-    if (!text) throw new Error('No response received — please try again');
-
-    document.getElementById('resultText').textContent = text;
-    resultWrap.classList.add('show');
-    saveToHistory(text);
-    setTimeout(() => resultWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
-
-  } catch(e) {
-    clearInterval(tipInt);
-    showErr('Something went wrong: ' + e.message);
-  } finally {
-    btn.disabled = false;
-    loading.classList.remove('show');
-  }
+function buildPromptAndShow() {
+  const prompt = buildPrompt();
+  document.getElementById('promptText').textContent = prompt;
+  document.getElementById('resultWrap').classList.add('show');
+  saveToHistory(prompt);
+  setTimeout(() => document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
 }
 
-function showErr(msg) {
-  const b = document.getElementById('errBox');
-  b.textContent = msg; b.classList.add('show');
-}
-
-// ── Copy ─────────────────────────────────────────────────────
-function copyText() {
-  const text = document.getElementById('resultText').textContent;
+function copyPrompt() {
+  const text = document.getElementById('promptText').textContent;
   if (navigator.clipboard?.writeText) {
     navigator.clipboard.writeText(text).then(showToast).catch(() => fallbackCopy(text));
   } else { fallbackCopy(text); }
 }
 function fallbackCopy(text) {
   const ta = document.createElement('textarea');
-  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
   document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, 99999);
   try { document.execCommand('copy'); showToast(); } catch(e) {}
   document.body.removeChild(ta);
 }
 function showToast() {
   const t = document.getElementById('toast');
-  t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2800);
+  t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000);
 }
 </script>
 </body>
