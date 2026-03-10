@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Hey Mum 💛</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f0; --warm: #f5ede0; --amber: #e8a84c; --amber-dark: #c4872a;
+    --brown: #5c3d2e; --brown-light: #8b6347; --text: #2d1f14; --text-soft: #7a5c46;
+    --card: #fffdf8; --border: #e8ddd0; --green: #5a7a5c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; padding-bottom: 80px; }
+
+  .top-bar { background: linear-gradient(135deg, var(--brown) 0%, var(--amber-dark) 100%); padding: 32px 20px 24px; text-align: center; position: relative; overflow: hidden; }
+  .top-bar::before { content: ''; position: absolute; top: -40px; right: -40px; width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.07); }
+  .top-bar::after { content: ''; position: absolute; bottom: -30px; left: -20px; width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+  .top-bar h1 { font-family: 'Playfair Display', serif; font-size: 30px; color: white; letter-spacing: -0.5px; }
+  .top-bar .sub { color: rgba(255,255,255,0.72); font-size: 13px; margin-top: 4px; font-weight: 300; }
+  .context-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; font-size: 12px; padding: 6px 16px; border-radius: 20px; margin-top: 12px; font-weight: 500; }
+
+  .content { padding: 20px 16px; max-width: 500px; margin: 0 auto; }
+  .section-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-soft); margin: 26px 0 10px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 16px; margin-bottom: 10px; box-shadow: 0 2px 10px rgba(92,61,46,0.06); }
+  .card-hint { font-size: 12px; color: var(--text-soft); margin-bottom: 12px; line-height: 1.5; }
+
+  /* Pills */
+  .pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill { background: var(--warm); border: 2px solid transparent; border-radius: 24px; padding: 8px 15px; font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; color: var(--text); line-height: 1; -webkit-tap-highlight-color: transparent; }
+  .pill:hover { border-color: var(--amber); }
+  .pill.on { background: var(--amber); border-color: var(--amber-dark); color: white; font-weight: 500; }
+
+  /* Textarea */
+  textarea { width: 100%; background: var(--warm); border: 1.5px solid var(--border); border-radius: 12px; padding: 13px 15px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text); resize: none; line-height: 1.6; transition: border-color 0.2s; outline: none; -webkit-appearance: none; }
+  textarea:focus { border-color: var(--amber); background: #fdf8f2; }
+  textarea::placeholder { color: var(--text-soft); opacity: 0.6; }
+
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chip { background: var(--warm); border: 1.5px solid var(--border); border-radius: 20px; padding: 6px 13px; font-size: 12px; cursor: pointer; transition: all 0.15s; color: var(--text-soft); font-family: 'DM Sans', sans-serif; -webkit-tap-highlight-color: transparent; user-select: none; }
+  .chip:active { transform: scale(0.95); background: #fdf3e4; border-color: var(--amber); color: var(--amber-dark); }
+
+  /* Slider */
+  .slider-row { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+  .slider-label { font-size: 12px; color: var(--text-soft); width: 60px; }
+  .slider-label.right { text-align: right; }
+  input[type=range] { flex: 1; -webkit-appearance: none; height: 4px; border-radius: 2px; background: var(--border); outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--amber); cursor: pointer; box-shadow: 0 2px 6px rgba(196,135,42,0.4); }
+  .slider-value { font-size: 13px; color: var(--amber-dark); font-weight: 600; min-width: 24px; text-align: center; }
+
+  /* Toggles */
+  .tog-row { display: flex; align-items: center; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--border); }
+  .tog-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .tog-label { font-size: 14px; font-weight: 500; }
+  .tog-sub { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
+  .tog { width: 46px; height: 26px; background: var(--border); border-radius: 13px; position: relative; cursor: pointer; transition: background 0.2s; border: none; flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
+  .tog.on { background: var(--amber); }
+  .tog::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+  .tog.on::after { transform: translateX(20px); }
+
+  /* Generate */
+  .gen-btn { width: 100%; background: linear-gradient(135deg, var(--amber) 0%, var(--amber-dark) 100%); color: white; border: none; border-radius: 18px; padding: 20px; font-size: 17px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 28px; transition: all 0.2s; box-shadow: 0 5px 20px rgba(196,135,42,0.38); letter-spacing: 0.2px; -webkit-tap-highlight-color: transparent; }
+  .gen-btn:active { transform: scale(0.98); }
+  .gen-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+  /* Loading */
+  .loading { text-align: center; padding: 32px; display: none; }
+  .loading.show { display: block; }
+  .spinner { width: 34px; height: 34px; border: 3px solid var(--border); border-top-color: var(--amber); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 14px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading p { color: var(--text-soft); font-size: 14px; }
+  .loading-tips { font-size: 12px; color: var(--border); margin-top: 6px; }
+
+  /* Result */
+  .result-wrap { display: none; }
+  .result-wrap.show { display: block; }
+  .result-card { background: var(--card); border: 2px solid var(--amber); border-radius: 18px; padding: 22px; margin-top: 22px; box-shadow: 0 6px 24px rgba(232,168,76,0.18); }
+  .result-tag { font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--amber-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .result-tag::after { content: ''; flex: 1; height: 1px; background: #f0dfc0; }
+  .result-text { font-size: 16px; line-height: 1.85; color: var(--text); white-space: pre-wrap; font-family: 'DM Sans', sans-serif; }
+  .result-actions { display: flex; gap: 10px; margin-top: 18px; }
+  .act-btn { flex: 1; padding: 14px; border-radius: 13px; font-size: 14px; font-family: 'DM Sans', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.15s; border: 2px solid; -webkit-tap-highlight-color: transparent; }
+  .btn-copy { background: var(--brown); color: white; border-color: var(--brown); }
+  .btn-copy:active { background: var(--text); }
+  .btn-regen { background: transparent; color: var(--brown-light); border-color: var(--border); }
+  .btn-regen:active { border-color: var(--amber); color: var(--amber-dark); }
+
+  /* Char count */
+  .char-count { font-size: 11px; color: var(--text-soft); text-align: right; margin-top: 5px; }
+
+  /* Error */
+  .err { background: #fff5f5; border: 2px solid #f5c0bb; border-radius: 14px; padding: 14px 16px; font-size: 13px; color: #c0574a; margin-top: 14px; display: none; line-height: 1.5; }
+  .err.show { display: block; }
+
+  /* API key */
+  .api-row { display: flex; gap: 8px; }
+  .api-input { flex: 1; background: var(--warm); border: 1.5px solid var(--border); border-radius: 11px; padding: 11px 13px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); outline: none; -webkit-appearance: none; }
+  .api-input:focus { border-color: var(--amber); }
+  .api-input::placeholder { color: var(--text-soft); opacity: 0.6; }
+  .api-save { background: var(--amber); border: none; border-radius: 11px; padding: 11px 16px; color: white; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+  .key-ok { font-size: 12px; color: var(--green); margin-top: 7px; display: none; font-weight: 500; }
+  .key-ok.show { display: block; }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(90px); background: var(--brown); color: white; padding: 14px 28px; border-radius: 28px; font-size: 15px; font-weight: 600; transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 100; box-shadow: 0 6px 20px rgba(0,0,0,0.25); white-space: nowrap; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Collapsible */
+  .collapsible-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .collapsible-header .arrow { font-size: 14px; transition: transform 0.2s; color: var(--text-soft); }
+  .collapsible-header.open .arrow { transform: rotate(180deg); }
+  .collapsible-body { overflow: hidden; max-height: 0; transition: max-height 0.3s ease; }
+  .collapsible-body.open { max-height: 1000px; }
+
+  /* Divider */
+  .spacer { height: 8px; }
+
+  /* History */
+  .history-item { background: var(--warm); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; font-size: 13px; color: var(--text-soft); line-height: 1.5; position: relative; cursor: pointer; border: 1.5px solid transparent; transition: border-color 0.15s; }
+  .history-item:hover { border-color: var(--amber); }
+  .history-item .hist-date { font-size: 11px; color: var(--border); margin-bottom: 4px; font-weight: 500; }
+  .history-item .hist-preview { color: var(--text); font-size: 13px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .history-empty { font-size: 13px; color: var(--text-soft); text-align: center; padding: 16px; opacity: 0.7; }
+
+  .btn-small { background: transparent; border: 1.5px solid var(--border); border-radius: 8px; padding: 5px 10px; font-size: 12px; font-family: 'DM Sans', sans-serif; color: var(--text-soft); cursor: pointer; }
+  .btn-small:hover { border-color: var(--amber); color: var(--amber-dark); }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>Hey Mum 💛</h1>
+  <div class="sub">Write a text to Linda, right now</div>
+  <div class="context-chip" id="contextChip">⏳ Loading...</div>
+</div>
+
+<div class="content">
+
+  <!-- API Key -->
+  <div class="section-label">Setup</div>
+  <div class="card">
+    <div class="card-hint">One-time setup. Get a free Claude API key at <strong style="color:var(--amber-dark)">console.anthropic.com</strong> → API Keys</div>
+    <div class="api-row">
+      <input type="password" class="api-input" id="apiKey" placeholder="sk-ant-..." autocomplete="off" />
+      <button class="api-save" onclick="saveKey()">Save</button>
+    </div>
+    <div class="key-ok" id="keyOk">✓ Key saved on this device</div>
+  </div>
+
+  <!-- Mood -->
+  <div class="section-label">Right now, you're feeling</div>
+  <div class="card">
+    <div class="card-hint">Pick everything that applies — no wrong answers.</div>
+    <div class="pill-row" id="moodRow">
+      <button class="pill" onclick="this.classList.toggle('on')">😊 Pretty good</button>
+      <button class="pill" onclick="this.classList.toggle('on')">😴 Tired</button>
+      <button class="pill" onclick="this.classList.toggle('on')">😤 Stressed out</button>
+      <button class="pill" onclick="this.classList.toggle('on')">😌 Chill</button>
+      <button class="pill" onclick="this.classList.toggle('on')">🤒 Under the weather</button>
+      <button class="pill" onclick="this.classList.toggle('on')">🔥 Motivated</button>
+      <button class="pill" onclick="this.classList.toggle('on')">😔 A bit down</button>
+      <button class="pill" onclick="this.classList.toggle('on')">🤩 Really excited</button>
+      <button class="pill" onclick="this.classList.toggle('on')">😤 Overwhelmed</button>
+      <button class="pill" onclick="this.classList.toggle('on')">🥱 Bored</button>
+      <button class="pill" onclick="this.classList.toggle('on')">😤 Frustrated</button>
+      <button class="pill" onclick="this.classList.toggle('on')">🙂 Alright, can't complain</button>
+      <button class="pill" onclick="this.classList.toggle('on')">😬 A bit anxious</button>
+      <button class="pill" onclick="this.classList.toggle('on')">🥰 Happy</button>
+    </div>
+  </div>
+
+  <!-- Energy -->
+  <div class="section-label">Energy level</div>
+  <div class="card">
+    <div class="slider-row">
+      <span class="slider-label">Flat 😴</span>
+      <input type="range" id="energySlider" min="1" max="10" value="5" oninput="document.getElementById('energyVal').textContent=this.value">
+      <span class="slider-value" id="energyVal">5</span>
+      <span class="slider-label right">Wired ⚡</span>
+    </div>
+  </div>
+
+  <!-- What's going on -->
+  <div class="section-label">What's going on right now?</div>
+  <div class="card">
+    <div class="card-hint">Could be big, could be tiny. Just something happening in your world.</div>
+    <textarea id="happenings" rows="4" placeholder="Just finished a big assignment, had a rough shift, caught up with someone, tried something new, something funny happened, nothing much..."></textarea>
+    <div class="char-count" id="happeningsCount">0 characters</div>
+    <div class="chips">
+      <span class="chip" onclick="addTo('happenings','just submitted an assignment')">📝 Submitted assignment</span>
+      <span class="chip" onclick="addTo('happenings','been grinding through study all day')">📚 Study grind</span>
+      <span class="chip" onclick="addTo('happenings','caught up with some mates')">👫 Saw mates</span>
+      <span class="chip" onclick="addTo('happenings','had a pretty quiet one at home')">🏠 Quiet day</span>
+      <span class="chip" onclick="addTo('happenings','went out and did something')">🚗 Got out</span>
+      <span class="chip" onclick="addTo('happenings','just finished a long shift at work')">💼 Long work day</span>
+      <span class="chip" onclick="addTo('happenings','something funny happened today')">😂 Something funny</span>
+      <span class="chip" onclick="addTo('happenings','had a bit of a win today')">🏆 Had a win</span>
+      <span class="chip" onclick="addTo('happenings','been struggling a bit lately')">😓 Struggling a bit</span>
+      <span class="chip" onclick="addTo('happenings','tried somewhere new to eat')">🍜 Tried somewhere new</span>
+      <span class="chip" onclick="addTo('happenings','went for a walk or run')">🏃 Got some exercise</span>
+      <span class="chip" onclick="addTo('happenings','spent the day doing nothing much')">☁️ Did nothing</span>
+      <span class="chip" onclick="addTo('happenings','had a long online tutorial')">💻 Had a tutorial</span>
+      <span class="chip" onclick="addTo('happenings','watched something good')">📺 Watched something</span>
+    </div>
+  </div>
+
+  <!-- Uni -->
+  <div class="section-label">Uni update (optional)</div>
+  <div class="card">
+    <div class="card-hint">Anything about how study's going — mum always wants to know.</div>
+    <textarea id="uniStuff" rows="3" placeholder="e.g. Got my first assignment back, struggling with one of the subjects, feeling on top of it, behind on readings..."></textarea>
+    <div class="chips">
+      <span class="chip" onclick="addTo('uniStuff','feeling pretty on top of things')">✅ On top of it</span>
+      <span class="chip" onclick="addTo('uniStuff','a bit behind but catching up')">📖 Catching up</span>
+      <span class="chip" onclick="addTo('uniStuff','got some results back')">📊 Got results</span>
+      <span class="chip" onclick="addTo('uniStuff','big deadline coming up')">⏰ Deadline soon</span>
+      <span class="chip" onclick="addTo('uniStuff','really enjoying the content')">🎓 Loving it</span>
+      <span class="chip" onclick="addTo('uniStuff','finding it tough but pushing through')">💪 Finding it tough</span>
+    </div>
+  </div>
+
+  <!-- Mum specific -->
+  <div class="section-label">Anything for Mum specifically?</div>
+  <div class="card">
+    <div class="card-hint">Questions for her, things about her life, family stuff, something you want her to know.</div>
+    <textarea id="forMum" rows="3" placeholder="Ask how she is, mention Dad or siblings, bring up something she told you last time, let her know you're thinking of her..."></textarea>
+    <div class="chips">
+      <span class="chip" onclick="addTo('forMum','ask how she\'s been doing')">💬 Ask how she is</span>
+      <span class="chip" onclick="addTo('forMum','ask about the rest of the family')">👨‍👩‍👧 Family check-in</span>
+      <span class="chip" onclick="addTo('forMum','mention rent is coming up')">💸 Rent mention</span>
+      <span class="chip" onclick="addTo('forMum','let her know I\'m thinking of her')">❤️ Thinking of her</span>
+      <span class="chip" onclick="addTo('forMum','suggest we catch up soon')">📆 Suggest catch-up</span>
+      <span class="chip" onclick="addTo('forMum','thank her for something')">🙏 Say thanks</span>
+      <span class="chip" onclick="addTo('forMum','mention something funny she\'d find amusing')">😄 Share something funny</span>
+    </div>
+  </div>
+
+  <!-- Advanced options collapsible -->
+  <div class="section-label">More options</div>
+  <div class="card">
+    <div class="collapsible-header" onclick="toggleCollapse(this)" id="advHeader">
+      <span style="font-size:14px;font-weight:500;">Tone, length & extras</span>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="collapsible-body" id="advBody">
+      <div class="spacer"></div>
+
+      <!-- Vibe -->
+      <div style="font-size:12px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin:14px 0 8px;">Vibe</div>
+      <div class="pill-row" id="vibeRow">
+        <button class="pill on" onclick="setVibe(this)">💬 Casual & warm</button>
+        <button class="pill" onclick="setVibe(this)">😂 Funny & jokey</button>
+        <button class="pill" onclick="setVibe(this)">💌 Sweet & loving</button>
+        <button class="pill" onclick="setVibe(this)">⚡ Short & snappy</button>
+        <button class="pill" onclick="setVibe(this)">🤗 Chatty & detailed</button>
+        <button class="pill" onclick="setVibe(this)">🌿 Calm & reflective</button>
+      </div>
+
+      <!-- Length -->
+      <div style="font-size:12px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin:18px 0 8px;">Length</div>
+      <div class="pill-row" id="lengthRow">
+        <button class="pill" onclick="setLength(this)">🤏 Super short (2–3 lines)</button>
+        <button class="pill on" onclick="setLength(this)">✉️ Normal text (4–6 lines)</button>
+        <button class="pill" onclick="setLength(this)">📜 Longer catch-up (7–10 lines)</button>
+      </div>
+
+      <!-- Include toggles -->
+      <div style="font-size:12px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin:18px 0 2px;">What to include</div>
+      <div class="tog-row">
+        <div><div class="tog-label">📅 What's coming up</div><div class="tog-sub">Upcoming plans, deadlines, things ahead</div></div>
+        <button class="tog on" id="t-next" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="tog-row">
+        <div><div class="tog-label">❓ Ask Mum something back</div><div class="tog-sub">End with a genuine question for her</div></div>
+        <button class="tog on" id="t-ask" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="tog-row">
+        <div><div class="tog-label">😂 Include something light/funny</div><div class="tog-sub">A small joke or something that'll make her smile</div></div>
+        <button class="tog" id="t-funny" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div class="tog-row">
+        <div><div class="tog-label">💰 Mention bills / money stuff</div><div class="tog-sub">Rent due, spending, financial things</div></div>
+        <button class="tog" id="t-money" onclick="this.classList.toggle('on')"></button>
+      </div>
+
+      <!-- Custom sign-off -->
+      <div style="font-size:12px;font-weight:600;color:var(--text-soft);letter-spacing:1px;text-transform:uppercase;margin:18px 0 8px;">Custom sign-off (optional)</div>
+      <textarea id="signoff" rows="1" placeholder="e.g. Love ya, Talk soon, Cheers — or leave blank for natural ending" style="min-height:44px;"></textarea>
+    </div>
+  </div>
+
+  <!-- Recent texts -->
+  <div class="section-label">Recent texts</div>
+  <div class="card" id="historyCard">
+    <div class="history-empty" id="histEmpty">No texts generated yet — your history will appear here.</div>
+    <div id="historyList"></div>
+  </div>
+
+  <button class="gen-btn" id="genBtn" onclick="generate()">✨ Write my text to Mum</button>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Writing something lovely...</p>
+    <div class="loading-tips" id="loadingTip"></div>
+  </div>
+
+  <div class="err" id="errBox"></div>
+
+  <div class="result-wrap" id="resultWrap">
+    <div class="result-card">
+      <div class="result-tag">✉️ Your text to Mum</div>
+      <div class="result-text" id="resultText"></div>
+    </div>
+    <div class="result-actions">
+      <button class="act-btn btn-copy" onclick="copyText()">📋 Copy text</button>
+      <button class="act-btn btn-regen" onclick="generate()">↺ Try again</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Copied! 💛 Paste it into your messages</div>
+
+<script>
+// ── Context chip ─────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  updateChip();
+  loadKey();
+  loadHistory();
+  setInterval(updateChip, 60000);
+  
+  document.getElementById('happenings').addEventListener('input', function() {
+    document.getElementById('happeningsCount').textContent = this.value.length + ' characters';
+  });
+});
+
+function updateChip() {
+  const now = new Date();
+  const h = now.getHours();
+  const greet = h < 6 ? '🌙 Late night' : h < 12 ? '🌅 Morning' : h < 17 ? '☀️ Afternoon' : h < 21 ? '🌆 Evening' : '🌙 Night';
+  const day = now.toLocaleDateString('en-AU', { weekday: 'long' });
+  const date = now.toLocaleDateString('en-AU', { day: 'numeric', month: 'long' });
+  document.getElementById('contextChip').textContent = `${greet} · ${day} ${date}`;
+}
+
+// ── Key ──────────────────────────────────────────────────────
+function saveKey() {
+  const v = document.getElementById('apiKey').value.trim();
+  if (!v) return;
+  localStorage.setItem('heymum_key', v);
+  document.getElementById('keyOk').classList.add('show');
+}
+function loadKey() {
+  const k = localStorage.getItem('heymum_key');
+  if (k) { document.getElementById('apiKey').value = k; document.getElementById('keyOk').classList.add('show'); }
+}
+
+// ── Pills ────────────────────────────────────────────────────
+function setVibe(btn) {
+  document.querySelectorAll('#vibeRow .pill').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+function setLength(btn) {
+  document.querySelectorAll('#lengthRow .pill').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+// ── Chips ────────────────────────────────────────────────────
+function addTo(id, text) {
+  const ta = document.getElementById(id);
+  const v = ta.value.trim();
+  ta.value = v ? v + ', ' + text : text;
+  ta.focus();
+  if (id === 'happenings') {
+    document.getElementById('happeningsCount').textContent = ta.value.length + ' characters';
+  }
+}
+
+// ── Collapsible ──────────────────────────────────────────────
+function toggleCollapse(header) {
+  header.classList.toggle('open');
+  document.getElementById('advBody').classList.toggle('open');
+}
+
+// ── History ──────────────────────────────────────────────────
+function loadHistory() {
+  const raw = localStorage.getItem('heymum_history');
+  if (!raw) return;
+  const history = JSON.parse(raw);
+  if (!history.length) return;
+  renderHistory(history);
+}
+
+function saveToHistory(text) {
+  const raw = localStorage.getItem('heymum_history');
+  const history = raw ? JSON.parse(raw) : [];
+  const now = new Date();
+  history.unshift({
+    text,
+    date: now.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+  });
+  if (history.length > 5) history.pop();
+  localStorage.setItem('heymum_history', JSON.stringify(history));
+  renderHistory(history);
+}
+
+function renderHistory(history) {
+  const list = document.getElementById('historyList');
+  const empty = document.getElementById('histEmpty');
+  empty.style.display = 'none';
+  list.innerHTML = history.map((h, i) => `
+    <div class="history-item" onclick="restoreHistory(${i})">
+      <div class="hist-date">${h.date}</div>
+      <div class="hist-preview">${h.text}</div>
+    </div>
+  `).join('');
+}
+
+function restoreHistory(i) {
+  const raw = localStorage.getItem('heymum_history');
+  const history = JSON.parse(raw);
+  document.getElementById('resultText').textContent = history[i].text;
+  document.getElementById('resultWrap').classList.add('show');
+  document.getElementById('resultWrap').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── Build prompt ─────────────────────────────────────────────
+function buildPrompt() {
+  const now = new Date();
+  const h = now.getHours();
+  const tod = h < 6 ? 'late at night' : h < 12 ? 'morning' : h < 17 ? 'afternoon' : h < 21 ? 'evening' : 'night';
+  const day = now.toLocaleDateString('en-AU', { weekday: 'long' });
+  const date = now.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const moods = [...document.querySelectorAll('#moodRow .pill.on')].map(b => b.textContent.trim()).join(', ') || 'nothing specific selected';
+  const energy = document.getElementById('energySlider').value;
+  const happenings = document.getElementById('happenings').value.trim() || 'nothing specific';
+  const uniStuff = document.getElementById('uniStuff').value.trim();
+  const forMum = document.getElementById('forMum').value.trim();
+  const signoff = document.getElementById('signoff').value.trim();
+
+  const vibe = document.querySelector('#vibeRow .pill.on')?.textContent.trim() || 'Casual & warm';
+  const length = document.querySelector('#lengthRow .pill.on')?.textContent.trim() || 'Normal text';
+  const incNext = document.getElementById('t-next').classList.contains('on');
+  const incAsk = document.getElementById('t-ask').classList.contains('on');
+  const incFunny = document.getElementById('t-funny').classList.contains('on');
+  const incMoney = document.getElementById('t-money').classList.contains('on');
+
+  const lengthGuide = length.includes('Super short') ? '2–3 sentences maximum' 
+    : length.includes('Longer') ? '7–10 sentences, a real proper catch-up'
+    : '4–6 sentences, a natural text length';
+
+  const extras = [];
+  if (uniStuff) extras.push(`Uni update: ${uniStuff}`);
+  if (forMum) extras.push(`Specific things for Mum: ${forMum}`);
+  if (incNext) extras.push("naturally mention what's coming up soon");
+  if (incAsk) extras.push('end with a genuine, warm question for Mum');
+  if (incFunny) extras.push('weave in something light or funny she would enjoy');
+  if (incMoney) extras.push('casually mention any bill or money thing if relevant');
+  if (signoff) extras.push(`use this sign-off: "${signoff}"`);
+
+  return `You're helping Chris, a uni student in Brisbane, write a text message to his mum Linda right now.
+
+CURRENT MOMENT:
+- Time: ${tod} on ${day}, ${date}
+- Feeling: ${moods}
+- Energy level: ${energy}/10 (1=exhausted, 10=wired)
+- What's going on: ${happenings}
+${extras.length ? '\nEXTRAS:\n- ' + extras.join('\n- ') : ''}
+
+TEXT REQUIREMENTS:
+- Sound exactly like a real Australian young guy texting his mum — genuinely casual, no stiffness
+- Vibe: ${vibe}
+- Length: ${lengthGuide}
+- Start with "Hey Mum,"
+- NO bullet points, NO lists — it's a text message
+- Reflect the actual time of day and day — ${tod} on ${day} should feel different to other moments
+- Let Chris's energy level (${energy}/10) come through naturally in the tone and pace
+- Feel grounded in THIS specific moment, not a generic update
+- Australian English — natural, not forced
+- Warm but not over the top or sappy
+
+Output ONLY the message. No explanation, no quotes, just the text Chris can send.`;
+}
+
+// ── Generate ─────────────────────────────────────────────────
+const tips = [
+  'Reading your mood...', 'Finding the right words...', 'Making it sound like you...',
+  'Adding a bit of warmth...', 'Almost there...'
+];
+
+async function generate() {
+  const key = document.getElementById('apiKey').value.trim();
+  if (!key) { showErr('Please enter your Claude API key at the top first. You can get one free at console.anthropic.com'); return; }
+
+  const btn = document.getElementById('genBtn');
+  const loading = document.getElementById('loading');
+  const resultWrap = document.getElementById('resultWrap');
+  document.getElementById('errBox').classList.remove('show');
+
+  btn.disabled = true;
+  loading.classList.add('show');
+  resultWrap.classList.remove('show');
+
+  let tipIdx = 0;
+  const tipEl = document.getElementById('loadingTip');
+  tipEl.textContent = tips[0];
+  const tipInterval = setInterval(() => {
+    tipIdx = (tipIdx + 1) % tips.length;
+    tipEl.textContent = tips[tipIdx];
+  }, 1800);
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 600,
+        messages: [{ role: 'user', content: buildPrompt() }]
+      })
+    });
+
+    clearInterval(tipInterval);
+
+    if (!res.ok) {
+      const e = await res.json();
+      throw new Error(e.error?.message || `API error ${res.status}`);
+    }
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text?.trim() || '';
+    document.getElementById('resultText').textContent = text;
+    resultWrap.classList.add('show');
+    saveToHistory(text);
+    setTimeout(() => resultWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+
+  } catch(e) {
+    clearInterval(tipInterval);
+    showErr('Something went wrong: ' + e.message + '\n\nMake sure your API key is correct and you have credits at console.anthropic.com');
+  } finally {
+    btn.disabled = false;
+    loading.classList.remove('show');
+  }
+}
+
+function showErr(msg) {
+  const b = document.getElementById('errBox');
+  b.textContent = msg; b.classList.add('show');
+}
+
+// ── Copy ─────────────────────────────────────────────────────
+function copyText() {
+  const text = document.getElementById('resultText').textContent;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(showToast).catch(() => fallbackCopy(text));
+  } else {
+    fallbackCopy(text);
+  }
+}
+
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select(); ta.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  showToast();
+}
+
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
